@@ -1,8 +1,9 @@
 import React from "react";
-import { GoogleMap, DirectionsRenderer, useJsApiLoader } from "@react-google-maps/api";
+import { GoogleMap, DirectionsRenderer } from "@react-google-maps/api";
 import { useEffect, useState } from 'react';
 import fixDuration from "../utils/utils";
 import Route from "./Route";
+import Result from "./Result";
 
 const center = { lat: 40.7659104, lng: -73.9760941 };
 const horseSpeed = 28;
@@ -53,19 +54,9 @@ const Map = ({isLoaded}) => {
                 setDistanceValue={setDistanceValue}
                 setDuration={setDuration}
             />
-            {/* <div>
-                <Autocomplete>
-                    <input type='text' placeholder='Origin' ref={originRef} />
-                </Autocomplete>
-                <Autocomplete>
-                    <input type='text' placeholder='Destination' ref={destinationRef} />
-                </Autocomplete>
-            </div>
-            <button onClick={calculateRoute}>Calculate</button>
-            <button onClick={clearRoute}>CLEAR</button> */}
             <p> hello {distance} and {duration}</p>
-            <p> By Horse {durHorse}</p>
-            <p> By Snail {durSnail}</p>
+            <Result animal={"Horse"} duration={durHorse}/>
+            <Result animal={"Snail"} duration={durSnail}/>
         </div>
     )
 }
