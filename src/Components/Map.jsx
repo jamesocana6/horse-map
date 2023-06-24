@@ -1,14 +1,16 @@
 import React from "react";
 import { GoogleMap, DirectionsRenderer } from "@react-google-maps/api";
 import { useEffect, useState } from 'react';
-import fixDuration from "../utils/utils";
+import { fixDuration, stops } from "../utils/utils";
 import Route from "./Route";
 import Result from "./Result";
 
 const center = { lat: 40.7659104, lng: -73.9760941 };
-const horseSpeed = 28;
-const greyhoundSpeed = 40;
-const snailSpeed = 6.2137e-7;
+const horseSpeed = 28; //miles per hour with person
+const horseDistance = 80; //miles a day
+const huskySpeed = 20; //miles per hour with sled
+const huskyDistance = 80; //miles a day
+const snailSpeed = 6.2137e-7; //miles per hour
 
 const Map = ({isLoaded}) => {
     const [map, setMap] = useState(null);
@@ -18,14 +20,14 @@ const Map = ({isLoaded}) => {
     const [duration, setDuration] = useState("");
     const [durHorse, setDurHorse] = useState();
     const [durSnail, setDurSnail] = useState();
-    const [durGreyhound, setDurGreyhound] = useState();
+    const [durHusky, setDurHusky] = useState();
 
     useEffect(() => {
         setDurHorse(fixDuration((distanceValue / 1609.34) / horseSpeed));
         setDurSnail(fixDuration((distanceValue / 1609.34) / snailSpeed));
-        setDurGreyhound(fixDuration((distanceValue / 1609.34) / greyhoundSpeed));
+        setDurHusky(fixDuration((distanceValue / 1609.34) / huskySpeed));
         return () => { }
-    }, [distance, duration])
+    }, [distanceValue, duration])
 
     if (!isLoaded) {
         return (
@@ -56,12 +58,13 @@ const Map = ({isLoaded}) => {
                 setDistanceValue={setDistanceValue}
                 setDuration={setDuration}
             />
-            <p> hello {distance} and {duration}</p>
-            <div style={{display: "flex", flexDirection: "column"}}>
-                <Result animal={"Horse"} duration={durHorse}/>
-                <Result animal={"Snail"} duration={durSnail}/>
-                <Result animal={"Greyhound"} duration={durGreyhound}/>
-            </div>
+            {distance ? <div style={{display: "flex", flexDirection: "column"}}>
+            <p> Distance {distance}</p>
+                <p>Travel Time</p>
+                <Result animal={"Horseback"} duration={durHorse} stops={stops(distanceValue, horseDistance)}/>
+                <Result animal={"Snail"} duration={durSnail} stops={0}/>
+                <Result animal={"Dogsled"} duration={durHusky} stops={stops(distanceValue, huskyDistance)}/>
+            </div> : null}
         </div>
     )
 }

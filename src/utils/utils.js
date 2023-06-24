@@ -1,4 +1,4 @@
-export default function fixDuration (time) {
+export function fixDuration (time) {
     //if duration < 1, then change to minutes.
     //if duration > 24, then change to days.
     let days = 0;
@@ -8,5 +8,13 @@ export default function fixDuration (time) {
     } 
     let hours = Math.floor(time);
     let mins = Math.ceil((time%1) * 60);
-    return `${days > 0 ? days+" days" : ""} ${hours > 0 ? hours+" hours" : ""} ${mins > 0 ? mins+" mins" : ""}`
+    let daysText = days === 1 ? " day" : " days";
+    let hoursText = hours === 1 ? " hour" : " hours";
+    let minsText = mins === 1 ? " min" : " mins";
+    return `${days > 0 ? days+daysText : ""} ${hours > 0 ? hours+hoursText : ""} ${mins > 0 ? mins+minsText : ""}`
+}
+
+//CREATE STOPS FOR HORSE and husky
+export function stops(distance, animalDistance) { 
+    return (distance / 1609.34) > animalDistance ? Math.ceil((distance / 1609.34)/animalDistance) : 0;
 }

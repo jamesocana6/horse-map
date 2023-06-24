@@ -14,21 +14,32 @@ const Route = ({setDirectionsResponse, setDistance, setDistanceValue, setDuratio
         const result = await directionsService.route({
             origin: originRef.current.value,
             destination: destinationRef.current.value,
-            travelMode: google.maps.TravelMode.BICYCLING, //eslint-disable-line no-undef
-            unitSystem: google.maps.UnitSystem.IMPERIAL //eslint-disable-line no-undef
+            travelMode: google.maps.TravelMode.DRIVING, //eslint-disable-line no-undef
+            unitSystem: google.maps.UnitSystem.IMPERIAL, //eslint-disable-line no-undef
+            provideRouteAlternatives: true, 
         })
         setDirectionsResponse(result);
-        setDistance(result.routes[0].legs[0].distance.text);
-        setDistanceValue(result.routes[0].legs[0].distance.value);
-        setDuration(result.routes[0].legs[0].duration.text);
-    }
+        console.log("something1",result.routes[0]?.legs[0]?.distance.value)
+        console.log("something2",result.routes[1]?.legs[0]?.distance.value)
+        console.log("something3",result.routes[2]?.legs[0]?.distance.value)
+        if (result.routes[0]?.legs[0]?.distance.value <= result.routes[1]?.legs[0]?.distance.value 
+            && result.routes[0]?.legs[0]?.distance.value <= result.routes[2]?.legs[0]?.distance.value ) {
+                console.log("OPTION1")
 
-    function clearRoute() {
-        setDirectionsResponse(null);
-        setDistance("");
-        setDuration("");
-        originRef.current.value = "";
-        destinationRef.current.value = "";
+                setDistance(result.routes[0]?.legs[0]?.distance.text);
+                setDistanceValue(result.routes[0]?.legs[0]?.distance.value);
+                setDuration(result.routes[0]?.legs[0]?.duration.text);
+            } else if (result.routes[1]?.legs[0]?.distance.value <= result.routes[2]?.legs[0]?.distance.value ) {
+            console.log("OPTION2")
+            setDistance(result.routes[1]?.legs[0]?.distance.text);
+            setDistanceValue(result.routes[1]?.legs[0]?.distance.value);
+            setDuration(result.routes[1]?.legs[0]?.duration.text);
+        } else {
+            console.log("OPTION3")
+            setDistance(result.routes[2]?.legs[0]?.distance.text);
+            setDistanceValue(result.routes[2]?.legs[0]?.distance.value);
+            setDuration(result.routes[2]?.legs[0]?.duration.text);
+        }
     }
 
     return (
@@ -42,7 +53,6 @@ const Route = ({setDirectionsResponse, setDistance, setDistanceValue, setDuratio
                 </Autocomplete>
             </div>
             <button onClick={calculateRoute}>Calculate</button>
-            <button onClick={clearRoute}>CLEAR</button>
         </div>
     )
 }

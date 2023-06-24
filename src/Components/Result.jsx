@@ -1,9 +1,12 @@
 import React from "react";
 
-const Result = ({animal, duration}) => {
+const Result = ({animal, duration, stops}) => {
     return (
         <div>
-            {animal} {duration}
+            <p>{animal}: {duration}</p>
+            { stops > 1 ? 
+            <p>Approximate number of stops: {stops}</p> 
+            : null }
         </div>
     )
 }
