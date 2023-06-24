@@ -7,7 +7,7 @@ import Result from "./Result";
 
 const center = { lat: 40.7659104, lng: -73.9760941 };
 const horseSpeed = 28;
-const dogSpeed = 40;
+const greyhoundSpeed = 40;
 const snailSpeed = 6.2137e-7;
 
 const Map = ({isLoaded}) => {
@@ -18,10 +18,12 @@ const Map = ({isLoaded}) => {
     const [duration, setDuration] = useState("");
     const [durHorse, setDurHorse] = useState();
     const [durSnail, setDurSnail] = useState();
+    const [durGreyhound, setDurGreyhound] = useState();
 
     useEffect(() => {
         setDurHorse(fixDuration((distanceValue / 1609.34) / horseSpeed));
         setDurSnail(fixDuration((distanceValue / 1609.34) / snailSpeed));
+        setDurGreyhound(fixDuration((distanceValue / 1609.34) / greyhoundSpeed));
         return () => { }
     }, [distance, duration])
 
@@ -55,8 +57,11 @@ const Map = ({isLoaded}) => {
                 setDuration={setDuration}
             />
             <p> hello {distance} and {duration}</p>
-            <Result animal={"Horse"} duration={durHorse}/>
-            <Result animal={"Snail"} duration={durSnail}/>
+            <div style={{display: "flex", flexDirection: "column"}}>
+                <Result animal={"Horse"} duration={durHorse}/>
+                <Result animal={"Snail"} duration={durSnail}/>
+                <Result animal={"Greyhound"} duration={durGreyhound}/>
+            </div>
         </div>
     )
 }
