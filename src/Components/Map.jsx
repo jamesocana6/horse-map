@@ -10,7 +10,7 @@ const horseSpeed = 28; //miles per hour with person
 const horseDistance = 80; //miles a day
 const huskySpeed = 20; //miles per hour with sled
 const huskyDistance = 80; //miles a day
-const snailSpeed = 6.2137e-7; //miles per hour
+const snailSpeed = 0.00223694; //miles per hour
 
 const Map = ({isLoaded}) => {
     const [map, setMap] = useState(null);
@@ -40,13 +40,25 @@ const Map = ({isLoaded}) => {
     }
 
     return (
-        <div style={{ display: "flex", flexDirection: "row", width: "100vw", height: "100vh", backgroundColor: "tan" }}>
+        <div style={{ display: "flex", flexDirection: "row", width: "100vw", height: "100vh"}}>
             <GoogleMap
                 center={center}
                 zoom={4}
-                mapContainerStyle={{ width: "50%", height: "100%" }}
+                mapContainerStyle={{ 
+                    position: "sitcky",
+                    width: "40%", 
+                    height: "90%", 
+                    borderWidth: 1,
+                    borderStyle: "solid",
+                    borderColor: "black",
+                    borderRadius: 10, 
+                    alignSelf: "center", 
+                }}
                 options={{
                     fullscreenControl: false,
+                    streetViewControl: false,
+                    mapTypeControl: false,
+                    minZoom: 2,
                 }}
                 onLoad={map => setMap(map)}
             >

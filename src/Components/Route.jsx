@@ -19,23 +19,16 @@ const Route = ({setDirectionsResponse, setDistance, setDistanceValue, setDuratio
             provideRouteAlternatives: true, 
         })
         setDirectionsResponse(result);
-        console.log("something1",result.routes[0]?.legs[0]?.distance.value)
-        console.log("something2",result.routes[1]?.legs[0]?.distance.value)
-        console.log("something3",result.routes[2]?.legs[0]?.distance.value)
         if (result.routes[0]?.legs[0]?.distance.value <= result.routes[1]?.legs[0]?.distance.value 
             && result.routes[0]?.legs[0]?.distance.value <= result.routes[2]?.legs[0]?.distance.value ) {
-                console.log("OPTION1")
-
-                setDistance(result.routes[0]?.legs[0]?.distance.text);
-                setDistanceValue(result.routes[0]?.legs[0]?.distance.value);
-                setDuration(result.routes[0]?.legs[0]?.duration.text);
+            setDistance(result.routes[0]?.legs[0]?.distance.text);
+            setDistanceValue(result.routes[0]?.legs[0]?.distance.value);
+            setDuration(result.routes[0]?.legs[0]?.duration.text);
             } else if (result.routes[1]?.legs[0]?.distance.value <= result.routes[2]?.legs[0]?.distance.value ) {
-            console.log("OPTION2")
             setDistance(result.routes[1]?.legs[0]?.distance.text);
             setDistanceValue(result.routes[1]?.legs[0]?.distance.value);
             setDuration(result.routes[1]?.legs[0]?.duration.text);
         } else {
-            console.log("OPTION3")
             setDistance(result.routes[2]?.legs[0]?.distance.text);
             setDistanceValue(result.routes[2]?.legs[0]?.distance.value);
             setDuration(result.routes[2]?.legs[0]?.duration.text);
@@ -43,16 +36,18 @@ const Route = ({setDirectionsResponse, setDistance, setDistanceValue, setDuratio
     }
 
     return (
-        <div>
-            <div>
+        <div style={{display: "flex", flexDirection: "row", position: "absolute", zIndex: 1, height: "15%", width: "40.1%", backgroundColor: "rgba(50,50,50,0.5)", top: "5%", borderTopLeftRadius: 10, borderTopRightRadius: 10, alignItems: "center",}}>
+            <div style={{display: "flex", flexDirection: "column", marginBlock: 5, width: "70%", }}>
                 <Autocomplete>
-                    <input type='text' placeholder='Origin' ref={originRef} />
+                    <input type='text' placeholder='Origin' ref={originRef} style={{marginLeft: "7%", marginBlock: 5, width: "100%", height: 20,}}/>
                 </Autocomplete>
                 <Autocomplete>
-                    <input type='text' placeholder='Destination' ref={destinationRef} />
+                    <input type='text' placeholder='Destination' ref={destinationRef} style={{marginLeft: "7%", marginBlock: 5, width: "100%", height: 20,}}/>
                 </Autocomplete>
             </div>
-            <button onClick={calculateRoute}>Calculate</button>
+            <div style={{justifyContent: "flex-start", width: "15%",marginLeft: "9%",}}>
+                <button onClick={calculateRoute} style={{ height: 25, marginLeft: "9%", width: "100%"}}>Start</button>
+            </div>
         </div>
     )
 }
