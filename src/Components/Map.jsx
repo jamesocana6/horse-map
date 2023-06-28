@@ -73,9 +73,9 @@ const Map = ({isLoaded}) => {
             {distance ? <div style={{display: "flex", flexDirection: "column"}}>
             <p> Distance {distance}</p>
                 <p>Travel Time</p>
-                <Result animal={"Horseback"} duration={durHorse} stops={stops(distanceValue, horseDistance)}/>
-                <Result animal={"Snail"} duration={durSnail} stops={0}/>
-                <Result animal={"Dogsled"} duration={durHusky} stops={stops(distanceValue, huskyDistance)}/>
+                <Result animal={"Horseback"} duration={durHorse} stops={stops(distanceValue, horseDistance)} animalPic={require("../public/Horse.png")}/>
+                <Result animal={"Snail"} duration={durSnail} stops={0} animalPic={require("../public/Snail.png")}/>
+                <Result animal={"Dogsled"} duration={durHusky} stops={stops(distanceValue, huskyDistance)} animalPic={require("../public/Dog.png")}/>
             </div> : null}
         </div>
     )

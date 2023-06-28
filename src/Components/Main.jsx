@@ -18,4 +18,5 @@ export default Main;
 //TODO
 //styling map, directions, results
 //draw horse snail and dog
+//on hover animalpic, animate 
 //help page? Something happened and no vehicles work. luckily you have a horse and dogsled to take you around. They abide by driving laws and go a steady pace. The travel time is not including the recommended number of stops. 

@@ -19,20 +19,12 @@ const Route = ({setDirectionsResponse, setDistance, setDistanceValue, setDuratio
             provideRouteAlternatives: true, 
         })
         setDirectionsResponse(result);
-        if (result.routes[0]?.legs[0]?.distance.value <= result.routes[1]?.legs[0]?.distance.value 
-            && result.routes[0]?.legs[0]?.distance.value <= result.routes[2]?.legs[0]?.distance.value ) {
-            setDistance(result.routes[0]?.legs[0]?.distance.text);
-            setDistanceValue(result.routes[0]?.legs[0]?.distance.value);
-            setDuration(result.routes[0]?.legs[0]?.duration.text);
-            } else if (result.routes[1]?.legs[0]?.distance.value <= result.routes[2]?.legs[0]?.distance.value ) {
-            setDistance(result.routes[1]?.legs[0]?.distance.text);
-            setDistanceValue(result.routes[1]?.legs[0]?.distance.value);
-            setDuration(result.routes[1]?.legs[0]?.duration.text);
-        } else {
-            setDistance(result.routes[2]?.legs[0]?.distance.text);
-            setDistanceValue(result.routes[2]?.legs[0]?.distance.value);
-            setDuration(result.routes[2]?.legs[0]?.duration.text);
-        }
+        const shortest = result.routes.reduce((prev, curr) => {
+            return prev.legs[0].distance.value < curr.legs[0].distance.value ? prev : curr
+        })
+        setDistance(shortest.legs[0]?.distance.text);
+        setDistanceValue(shortest.legs[0]?.distance.value);
+        setDuration(shortest.legs[0]?.duration.text);
     }
 
     return (
