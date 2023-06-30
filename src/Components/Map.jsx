@@ -52,6 +52,7 @@ const Map = ({isLoaded}) => {
                     borderStyle: "solid",
                     borderColor: "black",
                     borderRadius: 10, 
+                    marginRight: 20,
                     alignSelf: "center", 
                 }}
                 options={{
@@ -73,9 +74,27 @@ const Map = ({isLoaded}) => {
             {distance ? <div style={{display: "flex", flexDirection: "column"}}>
             <p> Distance {distance}</p>
                 <p>Travel Time</p>
-                <Result animal={"Horseback"} duration={durHorse} stops={stops(distanceValue, horseDistance)} animalPic={require("../public/Horse.png")}/>
-                <Result animal={"Snail"} duration={durSnail} stops={0} animalPic={require("../public/Snail.png")}/>
-                <Result animal={"Dogsled"} duration={durHusky} stops={stops(distanceValue, huskyDistance)} animalPic={require("../public/Dog.png")}/>
+                <Result 
+                    animal={"Horseback"} 
+                    duration={durHorse} 
+                    stops={stops(distanceValue, horseDistance)} 
+                    animalPic={require("../public/Horse.png")}
+                    animalStop={horseDistance}
+                    />
+                <Result 
+                    animal={"Snail"}
+                    duration={durSnail}
+                    stops={0} 
+                    animalPic={require("../public/Snail.png")}
+                    animalStop={0}
+                    />
+                <Result 
+                    animal={"Dogsled"}
+                    duration={durHusky}
+                    stops={stops(distanceValue, huskyDistance)} 
+                    animalPic={require("../public/Dog.png")}
+                    animalStop={huskyDistance}
+                    />
             </div> : null}
         </div>
     )
