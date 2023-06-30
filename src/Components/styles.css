@@ -1,0 +1,9 @@
+@font-face {
+    font-family: "Shrikhand";
+    src: url("../public//fonts/Shrikhand-Regular.ttf");
+}
+
+.title {
+    font-family: "Shrikhand";
+    font-size: 45px;
+}

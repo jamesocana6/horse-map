@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { fixDuration, stops } from "../utils/utils";
 import Route from "./Route";
 import Result from "./Result";
+import "./styles.css"
 
 const center = { lat: 40.7659104, lng: -73.9760941 };
 const horseSpeed = 28; //miles per hour with person
@@ -12,7 +13,7 @@ const huskySpeed = 20; //miles per hour with sled
 const huskyDistance = 80; //miles a day
 const snailSpeed = 0.00223694; //miles per hour
 
-const Map = ({isLoaded}) => {
+const Map = ({ isLoaded }) => {
     const [map, setMap] = useState(null);
     const [directionsResponse, setDirectionsResponse] = useState(null);
     const [distance, setDistance] = useState("");
@@ -31,8 +32,8 @@ const Map = ({isLoaded}) => {
 
     if (!isLoaded) {
         return (
-            <div>
-                <p>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", background: "tan" }}>
+                <p style={{ fontSize: 72 }}>
                     Loading...
                 </p>
             </div>
@@ -40,20 +41,22 @@ const Map = ({isLoaded}) => {
     }
 
     return (
-        <div style={{ display: "flex", flexDirection: "row", width: "100vw", height: "100vh"}}>
+        <div style={{ width: "100vw", height: "100vh" }}>
             <GoogleMap
                 center={center}
                 zoom={4}
-                mapContainerStyle={{ 
-                    position: "sitcky",
-                    width: "40%", 
-                    height: "90%", 
+                mapContainerStyle={{
+                    top: "5%",
+                    position: "absolute",
+                    width: "100vw",
+                    maxWidth: "50%",
+                    height: "90vh",
                     borderWidth: 1,
                     borderStyle: "solid",
                     borderColor: "black",
-                    borderRadius: 10, 
+                    borderRadius: 10,
                     marginRight: 20,
-                    alignSelf: "center", 
+                    alignSelf: "center",
                 }}
                 options={{
                     fullscreenControl: false,
@@ -65,37 +68,40 @@ const Map = ({isLoaded}) => {
             >
                 {directionsResponse && <DirectionsRenderer directions={directionsResponse} />}
             </GoogleMap>
-            <Route 
-                setDirectionsResponse={setDirectionsResponse} 
-                setDistance={setDistance} 
+            <Route
+                setDirectionsResponse={setDirectionsResponse}
+                setDistance={setDistance}
                 setDistanceValue={setDistanceValue}
                 setDuration={setDuration}
             />
-            {distance ? <div style={{display: "flex", flexDirection: "column"}}>
-            <p> Distance {distance}</p>
-                <p>Travel Time</p>
-                <Result 
-                    animal={"Horseback"} 
-                    duration={durHorse} 
-                    stops={stops(distanceValue, horseDistance)} 
-                    animalPic={require("../public/Horse.png")}
-                    animalStop={horseDistance}
-                    />
-                <Result 
-                    animal={"Snail"}
-                    duration={durSnail}
-                    stops={0} 
-                    animalPic={require("../public/Snail.png")}
-                    animalStop={0}
-                    />
-                <Result 
-                    animal={"Dogsled"}
-                    duration={durHusky}
-                    stops={stops(distanceValue, huskyDistance)} 
-                    animalPic={require("../public/Dog.png")}
-                    animalStop={huskyDistance}
-                    />
-            </div> : null}
+            {distance ?
+                <div style={{ display: "flex", justifyContent: "flex-end", width: "100vw" }}>
+                    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: "50vw" }}>
+                        <p> Distance {distance}</p>
+                        <p className="title">Travel Time</p>
+                        <Result
+                            animal={"Horseback"}
+                            duration={durHorse}
+                            stops={stops(distanceValue, horseDistance)}
+                            animalPic={require("../public/Horse.png")}
+                            animalStop={horseDistance}
+                        />
+                        <Result
+                            animal={"Snail"}
+                            duration={durSnail}
+                            stops={0}
+                            animalPic={require("../public/Snail.png")}
+                            animalStop={0}
+                        />
+                        <Result
+                            animal={"Dogsled"}
+                            duration={durHusky}
+                            stops={stops(distanceValue, huskyDistance)}
+                            animalPic={require("../public/Dog.png")}
+                            animalStop={huskyDistance}
+                        />
+                    </div>
+                </div> : <div></div>}
         </div>
     )
 }
