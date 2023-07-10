@@ -1,5 +1,6 @@
 import Map from './Map';
 import { useJsApiLoader } from "@react-google-maps/api";
+import "./styles.css"
 
 function Main() {
   const { isLoaded } = useJsApiLoader({
@@ -8,6 +9,7 @@ function Main() {
   })
   return (
     <div style={{paddingInline: 20, backgroundColor: "tan"}}>
+      <p className="title" style={{textAlign: "center", marginTop: 0, paddingTop: 20}}>Animal Travel Times</p>
       <Map isLoaded={isLoaded}/>
     </div>
   );

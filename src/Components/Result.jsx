@@ -1,15 +1,14 @@
 import React from "react";
 
-const Result = ({ animal, duration, stops, animalPic, animalStop }) => {
+const Result = ({ animal, duration, animalPic, animation }) => {
+
     return (
         <div>
             <div style={{ display: "flex", flexDirection: "row" }}>
-                <img src={animalPic} style={{ height: 50 }} alt={{animalPic}}/>
+                {/* shake and slide div */}
+                <img src={animalPic} style={{ height: 50 }} alt={{animalPic}} className="wobble-hor-bottom slide-out-right"/>
                 <p>{animal}: {duration}</p>
             </div>
-            {stops > 1 ?
-                <p>Approximate number of stops (every {animalStop} miles): {stops}</p>
-                : null}
         </div>
     )
 }

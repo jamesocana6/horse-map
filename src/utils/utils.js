@@ -14,7 +14,7 @@ export function fixDuration (time) {
     return `${days > 0 ? days+daysText : ""} ${hours > 0 ? hours+hoursText : ""} ${mins > 0 ? mins+minsText : ""}`
 }
 
-//CREATE STOPS FOR HORSE and husky
+//CREATE STOPS FOR HORSE and husky. maybe not needed
 export function stops(distance, animalDistance) { 
     return (distance / 1609.34) > animalDistance ? Math.ceil((distance / 1609.34)/animalDistance) : 0;
 }

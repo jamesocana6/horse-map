@@ -4,13 +4,14 @@ import { useEffect, useState } from 'react';
 import { fixDuration, stops } from "../utils/utils";
 import Route from "./Route";
 import Result from "./Result";
-import "./styles.css"
 
 const center = { lat: 40.7659104, lng: -73.9760941 };
 const horseSpeed = 28; //miles per hour with person
-const horseDistance = 80; //miles a day
+// const horseDistance = 80; //miles a day
+// const humanSpeed = 6; //miles per hour with person
+// const humanDistance = 2; //miles a day
 const huskySpeed = 20; //miles per hour with sled
-const huskyDistance = 80; //miles a day
+// const huskyDistance = 80; //miles a day
 const snailSpeed = 0.00223694; //miles per hour
 
 const Map = ({ isLoaded }) => {
@@ -32,25 +33,25 @@ const Map = ({ isLoaded }) => {
 
     if (!isLoaded) {
         return (
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", background: "tan" }}>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "center"}}>
                 <p style={{ fontSize: 72 }}>
-                    Loading...
+                    Preparing the animals...
                 </p>
             </div>
         )
     }
 
     return (
-        <div style={{ width: "100vw", height: "100vh" }}>
+        <div style={{ width: "100vw", height: "100vh",}}>
             <GoogleMap
                 center={center}
                 zoom={4}
                 mapContainerStyle={{
-                    top: "5%",
+                    top: "15%",
                     position: "absolute",
                     width: "100vw",
                     maxWidth: "50%",
-                    height: "90vh",
+                    height: "80vh",
                     borderWidth: 1,
                     borderStyle: "solid",
                     borderColor: "black",
@@ -78,30 +79,23 @@ const Map = ({ isLoaded }) => {
                 <div style={{ display: "flex", justifyContent: "flex-end", width: "100vw" }}>
                     <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: "50vw" }}>
                         <p> Distance {distance}</p>
-                        <p className="title">Travel Time</p>
                         <Result
                             animal={"Horseback"}
                             duration={durHorse}
-                            stops={stops(distanceValue, horseDistance)}
                             animalPic={require("../public/Horse.png")}
-                            animalStop={horseDistance}
                         />
                         <Result
                             animal={"Snail"}
                             duration={durSnail}
-                            stops={0}
                             animalPic={require("../public/Snail.png")}
-                            animalStop={0}
                         />
                         <Result
                             animal={"Dogsled"}
                             duration={durHusky}
-                            stops={stops(distanceValue, huskyDistance)}
                             animalPic={require("../public/Dog.png")}
-                            animalStop={huskyDistance}
                         />
                     </div>
-                </div> : <div></div>}
+                </div> : <div>Loading...</div>}
         </div>
     )
 }
