@@ -83,16 +83,19 @@ const Map = ({ isLoaded }) => {
                             animal={"Horseback"}
                             duration={durHorse}
                             animalPic={require("../public/Horse.png")}
+                            slideLength={50/horseSpeed+"s"}
                         />
                         <Result
                             animal={"Snail"}
                             duration={durSnail}
                             animalPic={require("../public/Snail.png")}
+                            slideLength={0.05/snailSpeed+"s"}
                         />
                         <Result
                             animal={"Dogsled"}
                             duration={durHusky}
                             animalPic={require("../public/Dog.png")}
+                            slideLength={50/huskySpeed+"s"}
                         />
                     </div>
                 </div> : <div>Loading...</div>}
