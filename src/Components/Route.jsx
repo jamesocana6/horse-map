@@ -19,10 +19,10 @@ const Route = ({setDirectionsResponse, setDistance, setDistanceValue, setDuratio
             unitSystem: google.maps.UnitSystem.IMPERIAL, //eslint-disable-line no-undef
             provideRouteAlternatives: true, 
         })
-        setDirectionsResponse(result);
         const shortest = result.routes.reduce((prev, curr) => {
             return prev.legs[0].distance.value < curr.legs[0].distance.value ? prev : curr
         })
+        setDirectionsResponse(result);
         setDistance(shortest.legs[0]?.distance.text);
         setDistanceValue(shortest.legs[0]?.distance.value);
         setDuration(shortest.legs[0]?.duration.text);

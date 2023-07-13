@@ -40,7 +40,6 @@ const Map = ({ isLoaded }) => {
             </div>
         )
     }
-
     return (
         <div style={{ width: "100vw", height: "100vh",}}>
             <GoogleMap
@@ -76,9 +75,13 @@ const Map = ({ isLoaded }) => {
                 setDuration={setDuration}
             />
             {distance ?
-                <div style={{ display: "flex", justifyContent: "flex-end", width: "100vw" }}>
-                    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: "50vw" }}>
-                        <p> Distance {distance}</p>
+                <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "center", width: "100vw", flexDirection: "column"}}>
+                    <div style={{ display: "flex", flexDirection: "column", alignItems: "start", width: "50vw" }}>
+                        <p style={{paddingLeft: 20}}> Start: {directionsResponse.request.origin.query} </p>
+                        <p style={{paddingLeft: 20}}> End: {directionsResponse.request.destination.query} </p>
+                        <p style={{paddingLeft: 20}}> Distance {distance}</p>
+                    </div>
+                    <div style={{ display: "flex", flexDirection: "column", alignItems: "start", width: "50vw" }}>
                         <Result
                             animal={"Horseback"}
                             duration={durHorse}
