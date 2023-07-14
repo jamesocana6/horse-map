@@ -1,15 +1,22 @@
 import Map from './Map';
 import { useJsApiLoader } from "@react-google-maps/api";
 import "./styles.css"
+import InfoBtn from './InfoBtn';
+import { useState } from 'react';
+import InfoModal from './InfoModal';
 
 function Main() {
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API,
     libraries: ['places'],
   })
+  const [infoModal, setInfoModal] = useState(false)
+  console.log(infoModal)
   return (
-    <div style={{paddingInline: 20, backgroundColor: "tan"}}>
-      <p className="title" style={{textAlign: "center", marginTop: 0, paddingTop: 20}}>Animal Travel Times</p>
+    <div style={{ backgroundColor: "tan", height: "100vh", width: "100vw"}}>
+      <InfoBtn setInfoModal={setInfoModal}/>
+      <InfoModal infoModal={infoModal} setInfoModal={setInfoModal}/>
+      <p className="title" style={{textAlign: "center", margin: 0,}}>Animal Travel Times</p>
       <Map isLoaded={isLoaded}/>
     </div>
   );

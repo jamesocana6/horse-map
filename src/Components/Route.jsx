@@ -29,7 +29,7 @@ const Route = ({setDirectionsResponse, setDistance, setDistanceValue, setDuratio
     }
 
     return (
-        <div style={{display: "flex", flexDirection: "row", position: "absolute", zIndex: 1, height: "15%", width: "50.1vw", backgroundColor: "rgba(50,50,50,0.5)", top: "15%", borderTopLeftRadius: 10, borderTopRightRadius: 10, alignItems: "center",}}>
+        <div style={{left: 20, display: "flex", flexDirection: "row", position: "absolute", zIndex: 1, height: "15%", width: "50.1vw", backgroundColor: "rgba(50,50,50,0.5)", top: "12%", borderTopLeftRadius: 10, borderTopRightRadius: 10, alignItems: "center",}}>
             <div style={{display: "flex", flexDirection: "column", marginBlock: 5, width: "70%", }}>
                 <Autocomplete>
                     <input type='text' placeholder='Origin' ref={originRef} style={{marginLeft: "7%", marginBlock: 5, width: "100%", height: 20,}}/>

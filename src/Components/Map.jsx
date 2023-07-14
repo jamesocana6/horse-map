@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react';
 import { fixDuration, stops } from "../utils/utils";
 import Route from "./Route";
 import Result from "./Result";
+import Footer from "./Footer";
+import Animal from "./Animal";
 
 const center = { lat: 40.7659104, lng: -73.9760941 };
 const horseSpeed = 28; //miles per hour with person
@@ -33,7 +35,7 @@ const Map = ({ isLoaded }) => {
 
     if (!isLoaded) {
         return (
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "center"}}>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
                 <p style={{ fontSize: 72 }}>
                     Preparing the animals...
                 </p>
@@ -41,22 +43,24 @@ const Map = ({ isLoaded }) => {
         )
     }
     return (
-        <div style={{ width: "100vw", height: "100vh",}}>
+        <div style={{ }}>
             <GoogleMap
                 center={center}
                 zoom={4}
                 mapContainerStyle={{
-                    top: "15%",
+                    top: "12%",
                     position: "absolute",
-                    width: "100vw",
+                    width: "100%",
                     maxWidth: "50%",
-                    height: "80vh",
+                    height: "75%",
                     borderWidth: 1,
                     borderStyle: "solid",
                     borderColor: "black",
                     borderRadius: 10,
                     marginRight: 20,
                     alignSelf: "center",
+                    boxShadow: "0px 0px 10px",
+                    left: "20px",   
                 }}
                 options={{
                     fullscreenControl: false,
@@ -75,33 +79,31 @@ const Map = ({ isLoaded }) => {
                 setDuration={setDuration}
             />
             {distance ?
-                <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "center", width: "100vw", flexDirection: "column"}}>
+                <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "center", width: "100vw", flexDirection: "column" }}>
+                    <Result distance={distance} directionsResponse={directionsResponse}/>
                     <div style={{ display: "flex", flexDirection: "column", alignItems: "start", width: "50vw" }}>
-                        <p style={{paddingLeft: 20}}> Start: {directionsResponse.request.origin.query} </p>
-                        <p style={{paddingLeft: 20}}> End: {directionsResponse.request.destination.query} </p>
-                        <p style={{paddingLeft: 20}}> Distance {distance}</p>
-                    </div>
-                    <div style={{ display: "flex", flexDirection: "column", alignItems: "start", width: "50vw" }}>
-                        <Result
+                        <Animal
                             animal={"Horseback"}
                             duration={durHorse}
                             animalPic={require("../public/Horse.png")}
-                            slideLength={50/horseSpeed+"s"}
+                            slideLength={50 / horseSpeed + "s"}
                         />
-                        <Result
+                        <Animal
                             animal={"Snail"}
                             duration={durSnail}
                             animalPic={require("../public/Snail.png")}
-                            slideLength={0.05/snailSpeed+"s"}
+                            slideLength={0.05 / snailSpeed + "s"}
                         />
-                        <Result
+                        <Animal
                             animal={"Dogsled"}
                             duration={durHusky}
                             animalPic={require("../public/Dog.png")}
-                            slideLength={50/huskySpeed+"s"}
+                            slideLength={50 / huskySpeed + "s"}
                         />
                     </div>
-                </div> : <div>Loading...</div>}
+                </div> : 
+            <div></div>}
+            <Footer/>
         </div>
     )
 }
