@@ -15,7 +15,7 @@ function Main() {
   return (
     <div style={{ backgroundColor: "tan", height: "100vh", width: "100vw"}}>
       <InfoBtn setInfoModal={setInfoModal}/>
-      <InfoModal infoModal={infoModal} setInfoModal={setInfoModal}/>
+      {infoModal? <InfoModal infoModal={infoModal} setInfoModal={setInfoModal}/> : null}
       <p className="title" style={{textAlign: "center", margin: 0,}}>Animal Travel Times</p>
       <Map isLoaded={isLoaded}/>
     </div>
