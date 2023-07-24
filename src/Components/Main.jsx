@@ -11,7 +11,6 @@ function Main() {
     libraries: ['places'],
   })
   const [infoModal, setInfoModal] = useState(false)
-  console.log(infoModal)
   return (
     <div style={{ backgroundColor: "tan", height: "100vh", width: "100vw"}}>
       <InfoBtn setInfoModal={setInfoModal}/>

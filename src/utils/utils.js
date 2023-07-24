@@ -18,3 +18,23 @@ export function fixDuration (time) {
 export function stops(distance, animalDistance) { 
     return (distance / 1609.34) > animalDistance ? Math.ceil((distance / 1609.34)/animalDistance) : 0;
 }
+
+export const animalSpeeds = [
+    {
+        name: "Horse",
+        speedTxt: "28mph",
+        speed: 28,
+        distance: 80,
+    },
+    {
+        name: "Husky",
+        speedTxt: "20mph",
+        speed: 20,
+        distance: 80,
+    },
+    {
+        name: "Garden Snail",
+        speedTxt: "0.03mph",
+        speed: 0.03,
+    }
+]

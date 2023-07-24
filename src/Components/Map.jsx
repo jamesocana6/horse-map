@@ -1,20 +1,13 @@
 import React from "react";
 import { GoogleMap, DirectionsRenderer } from "@react-google-maps/api";
 import { useEffect, useState } from 'react';
-import { fixDuration, stops } from "../utils/utils";
+import { animalSpeeds, fixDuration, stops } from "../utils/utils";
 import Route from "./Route";
 import Result from "./Result";
 import Footer from "./Footer";
 import Animal from "./Animal";
 
 const center = { lat: 40.7659104, lng: -73.9760941 };
-const horseSpeed = 28; //miles per hour with person
-// const horseDistance = 80; //miles a day
-// const humanSpeed = 6; //miles per hour with person
-// const humanDistance = 2; //miles a day
-const huskySpeed = 20; //miles per hour with sled
-// const huskyDistance = 80; //miles a day
-const snailSpeed = 0.00223694; //miles per hour
 
 const Map = ({ isLoaded }) => {
     const [map, setMap] = useState(null);
@@ -27,9 +20,9 @@ const Map = ({ isLoaded }) => {
     const [durHusky, setDurHusky] = useState();
 
     useEffect(() => {
-        setDurHorse(fixDuration((distanceValue / 1609.34) / horseSpeed));
-        setDurSnail(fixDuration((distanceValue / 1609.34) / snailSpeed));
-        setDurHusky(fixDuration((distanceValue / 1609.34) / huskySpeed));
+        setDurHorse(fixDuration((distanceValue / 1609.34) / animalSpeeds[0].speed));
+        setDurSnail(fixDuration((distanceValue / 1609.34) / animalSpeeds[2].speed));
+        setDurHusky(fixDuration((distanceValue / 1609.34) / animalSpeeds[1].speed));
         return () => { }
     }, [distanceValue, duration])
 
@@ -86,19 +79,19 @@ const Map = ({ isLoaded }) => {
                             animal={"Horseback"}
                             duration={durHorse}
                             animalPic={require("../public/Horse.png")}
-                            slideLength={50 / horseSpeed + "s"}
+                            slideLength={50 / animalSpeeds[0].speed + "s"}
                         />
                         <Animal
                             animal={"Snail"}
                             duration={durSnail}
                             animalPic={require("../public/Snail.png")}
-                            slideLength={0.05 / snailSpeed + "s"}
+                            slideLength={0.5 / animalSpeeds[2].speed + "s"}
                         />
                         <Animal
                             animal={"Dogsled"}
                             duration={durHusky}
                             animalPic={require("../public/Dog.png")}
-                            slideLength={50 / huskySpeed + "s"}
+                            slideLength={50 / animalSpeeds[1].speed + "s"}
                         />
                     </div>
                 </div> : 
