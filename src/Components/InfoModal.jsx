@@ -29,7 +29,7 @@ const InfoModal = ({infoModal, setInfoModal}) => {
                     position: "absolute", 
                     height: "50vh", 
                     width: "50vw", 
-                    backgroundColor: "rgba(200,200,200,1)",
+                    backgroundColor: "rgba(240,240,240,1)",
                     borderRadius: 15,
                     }}
             >
